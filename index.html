@@ -779,22 +779,58 @@
         servings: Number(servingsInput?.value || 0) || 2,
       };
 
+      const prompt = [
+        'You are Plantify, a vegetarian recipe assistant.',
+        'Using ONLY the listed fresh produce and pantry staples (plus basic pantry items like salt, pepper, and water),',
+        'create EXACTLY 3 distinct vegetarian recipes.',
+        '',
+        `Each recipe should serve roughly ${payload.servings} people.`,
+        'Make the recipes approachable for home cooks.',
+        '',
+        'Fresh produce:',
+        payload.produce || '(none provided)',
+        '',
+        'Pantry staples:',
+        payload.pantry || '(none provided)',
+        '',
+        'Taste preferences:',
+        payload.preferences || '(none provided)',
+        '',
+        'Format the response as clearly labeled sections starting with:',
+        'Recipe 1: <title>',
+        'Recipe 2: <title>',
+        'Recipe 3: <title>',
+        'Follow each title with a short description, ingredients list, and steps.',
+      ].join('\n');
+
       try {
         setGeneratingState(true);
+
+        if (typeof CONFIG === 'undefined' || !CONFIG.OPENAI_ENDPOINT) {
+          throw new Error('Missing CONFIG.OPENAI_ENDPOINT for recipe calls.');
+        }
 
         const response = await fetch(CONFIG.OPENAI_ENDPOINT, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(payload),
+          body: JSON.stringify({
+            ...payload,
+            prompt,
+          }),
         });
 
         if (!response.ok) {
           throw new Error(`Request failed with status ${response.status} (${response.statusText})`);
         }
 
-        const data = await response.json();
+        let data;
+        try {
+          data = await response.json();
+        } catch (parseError) {
+          throw new Error('Unable to parse recipe response as JSON.');
+        }
 
         const textContent = data?.text?.trim?.() || '';
 
@@ -802,7 +838,8 @@
           showError('The recipe service returned an empty response. Please try again.');
           if (recipesEl) {
             recipesEl.classList.add('recipes-error');
-            recipesEl.innerHTML = '<div class="recipe-card-body">No recipes were generated. Try again in a moment.</div>';
+            recipesEl.innerHTML =
+              '<div class="recipe-card-body">No recipes were generated. Try again in a moment.</div>';
           }
           return;
         }
@@ -832,7 +869,10 @@
         recipesEl.classList.remove('empty', 'recipes-error');
 
         if (!sections.length) {
-          recipesEl.innerHTML = '<div class="recipe-card-body">We could not parse separate recipes, but here is the raw response:</div><pre class="recipe-card-body" style="margin-top:0.4rem; white-space:pre-wrap;">' + textContent + '</pre>';
+          recipesEl.innerHTML =
+            '<div class="recipe-card-body">We could not parse separate recipes, but here is the raw response:</div><pre class="recipe-card-body" style="margin-top:0.4rem; white-space:pre-wrap;">' +
+            textContent +
+            '</pre>';
           return;
         }
 
@@ -857,7 +897,8 @@
         showError('Something went wrong while generating recipes. Please try again in a moment.');
         if (recipesEl) {
           recipesEl.classList.add('recipes-error');
-          recipesEl.innerHTML = '<div class="recipe-card-body">We hit a snag talking to the recipe service. Your ingredients are safe—try generating again.</div>';
+          recipesEl.innerHTML =
+            '<div class="recipe-card-body">We hit a snag talking to the recipe service. Your ingredients are safe—try generating again.</div>';
         }
       } finally {
         setGeneratingState(false);
