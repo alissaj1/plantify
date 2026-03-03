@@ -20,6 +20,9 @@ app.get('/', (req, res) => {
 app.post('/api/recipes', async (req, res) => {
   const apiKey = process.env.OPENAI_API_KEY;
 
+  console.log('[v0] OPENAI_API_KEY present:', !!apiKey);
+  console.log('[v0] OPENAI_API_KEY length:', apiKey ? apiKey.length : 0);
+
   if (!apiKey) {
     return res
       .status(500)
@@ -80,12 +83,12 @@ app.post('/api/recipes', async (req, res) => {
       }),
     });
 
+    console.log('[v0] OpenAI response status:', response.status, response.statusText);
+
     if (!response.ok) {
       const text = await response.text().catch(() => '');
       console.error(
-        'Plantify server: OpenAI error',
-        response.status,
-        response.statusText,
+        '[v0] OpenAI error body:',
         text,
       );
       return res.status(502).json({
