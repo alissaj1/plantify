@@ -10,7 +10,12 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 // Serve static files (index.html, config files, etc.)
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname), { index: 'index.html' }));
+
+// Explicit fallback to serve index.html for the root route
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 app.post('/api/recipes', async (req, res) => {
   const apiKey = process.env.OPENAI_API_KEY;
@@ -119,7 +124,9 @@ app.post('/api/recipes', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Plantify server listening on http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`[v0] Plantify server listening on http://0.0.0.0:${PORT}`);
+  console.log(`[v0] Serving static files from: ${path.join(__dirname)}`);
+  console.log(`[v0] index.html exists:`, require('fs').existsSync(path.join(__dirname, 'index.html')));
 });
 
