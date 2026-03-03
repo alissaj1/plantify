@@ -17,11 +17,12 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+// Wire /api/generate to the same handler so the new endpoint works in Express too
+const generateHandler = require('./api/generate.js');
+app.post('/api/generate', (req, res) => generateHandler(req, res));
+
 app.post('/api/recipes', async (req, res) => {
   const apiKey = process.env.OPENAI_API_KEY;
-
-  console.log('[v0] OPENAI_API_KEY present:', !!apiKey);
-  console.log('[v0] OPENAI_API_KEY length:', apiKey ? apiKey.length : 0);
 
   if (!apiKey) {
     return res
@@ -83,12 +84,12 @@ app.post('/api/recipes', async (req, res) => {
       }),
     });
 
-    console.log('[v0] OpenAI response status:', response.status, response.statusText);
-
     if (!response.ok) {
       const text = await response.text().catch(() => '');
       console.error(
-        '[v0] OpenAI error body:',
+        'Plantify server: OpenAI error',
+        response.status,
+        response.statusText,
         text,
       );
       return res.status(502).json({

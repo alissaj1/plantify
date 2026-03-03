@@ -1024,9 +1024,8 @@
         });
 
         if (!response.ok) {
-          const errBody = await response.text().catch(() => '');
-          console.error('[v0] Server error response:', response.status, errBody);
-          throw new Error(`Request failed with status ${response.status}: ${errBody}`);
+  const errBody = await response.text().catch(() => '');
+  throw new Error(`Request failed with status ${response.status}: ${errBody}`);
         }
 
         let data;
@@ -1114,13 +1113,12 @@
           })
           .join('');
       } catch (error) {
-    console.error('[v0] Plantify API error:', error);
-    console.error('[v0] Error message:', error.message);
-    showError('Error: ' + error.message);
+    console.error('Plantify API error:', error);
+    showError('Something went wrong while generating recipes. Please try again in a moment.');
         if (recipesEl) {
           recipesEl.classList.add('recipes-error');
           recipesEl.innerHTML =
-            '<div class="recipe-card-body">DEBUG: ' + error.message + '</div>';
+            '<div class="recipe-card-body">We hit a snag talking to the recipe service. Your ingredients are safe—try generating again.</div>';
         }
       } finally {
         setGeneratingState(false);
