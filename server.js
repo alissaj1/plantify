@@ -125,6 +125,6 @@ app.post('/api/recipes', async (req, res) => {
 });
 
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Plantify server listening on http://0.0.0.0:${PORT}`);
+  console.log(`Plantify server listening on port ${PORT}`);
 });
 
