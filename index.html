@@ -4,21 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Plantify</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --green-dark: #1f5c4d;
-      --green: #3baf7a;
-      --green-soft: #e6f4ec;
-      --accent: #f5b971;
-      --text-main: #1e2a2a;
-      --text-muted: #5f6f6b;
-      --border-subtle: #d4e3da;
-      --error: #c0392b;
-      --bg: #f4f7f5;
-      --shadow-soft: 0 18px 45px rgba(12, 53, 36, 0.14);
-      --radius-lg: 18px;
+      --green-dark: #10463a;
+      --green: #38c28b;
+      --green-soft: #e5fff3;
+      --accent: #ff9fd6;
+      --accent-soft: #ffe5f3;
+      --ink: #12141c;
+      --text-main: #111520;
+      --text-muted: #6b7280;
+      --border-subtle: #dde6e0;
+      --error: #f04438;
+      --bg: #f6f7fb;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.16);
+      --radius-lg: 20px;
       --radius-md: 12px;
       --radius-pill: 999px;
+      --font-display: "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      --font-sans: "Helvetica Neue", -apple-system, BlinkMacSystemFont, system-ui, "SF Pro Text", "Segoe UI", sans-serif;
     }
 
     * {
@@ -28,9 +35,11 @@
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top left, #f0fff4 0, #f4f7f5 42%, #edf5f0 100%);
+      font-family: var(--font-sans);
+      background:
+        radial-gradient(circle at 0% 0%, #ffe8ff 0, transparent 55%),
+        radial-gradient(circle at 100% 0%, #e0f9ff 0, transparent 55%),
+        linear-gradient(180deg, #f6f7fb 0, #f2f5ff 100%);
       color: var(--text-main);
       display: flex;
       align-items: center;
@@ -41,8 +50,8 @@
     .app-shell {
       width: 100%;
       max-width: 980px;
-      background: linear-gradient(135deg, #ffffff 0, #f7fbf8 40%, #f2fbf6 100%);
-      border-radius: 28px;
+      background: #ffffff;
+      border-radius: 26px;
       box-shadow: var(--shadow-soft);
       padding: 2.4rem 2.6rem 2.3rem;
       position: relative;
@@ -54,8 +63,8 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at -10% -10%, rgba(59, 175, 122, 0.14), transparent 55%),
-        radial-gradient(circle at 110% 0%, rgba(245, 185, 113, 0.22), transparent 52%);
+        radial-gradient(circle at -10% -10%, rgba(56, 194, 139, 0.18), transparent 55%),
+        radial-gradient(circle at 110% 0%, rgba(255, 159, 214, 0.26), transparent 52%);
       opacity: 0.8;
       pointer-events: none;
     }
@@ -83,12 +92,13 @@
       width: 40px;
       height: 40px;
       border-radius: 18px;
-      background: radial-gradient(circle at 18% 0%, #ffffff 0, #e4f6ec 40%, #c9ebd7 100%);
-      border: 1px solid rgba(59, 175, 122, 0.22);
+      background:
+        radial-gradient(circle at 20% 0%, #ffffff 0, #ffe9f6 36%, #ffe0f3 70%, #ffd5ec 100%);
+      border: 1px solid rgba(255, 159, 214, 0.4);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 10px 26px rgba(20, 80, 58, 0.18);
+      box-shadow: 0 10px 26px rgba(236, 72, 153, 0.22);
     }
 
     .brand-mark svg {
@@ -101,14 +111,16 @@
 
     h1 {
       margin: 0;
-      font-size: 1.65rem;
-      letter-spacing: 0.03em;
-      color: var(--green-dark);
+      font-size: 1.7rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink);
+      font-family: var(--font-display);
     }
 
     .subtitle {
       margin: 0.15rem 0 0;
-      font-size: 0.9rem;
+      font-size: 0.86rem;
       color: var(--text-muted);
     }
 
@@ -118,10 +130,10 @@
       gap: 0.4rem;
       padding: 0.35rem 0.9rem;
       border-radius: var(--radius-pill);
-      background: rgba(230, 244, 236, 0.9);
-      border: 1px solid rgba(59, 175, 122, 0.32);
-      font-size: 0.8rem;
-      color: var(--green-dark);
+      background: rgba(255, 241, 252, 0.95);
+      border: 1px solid rgba(255, 159, 214, 0.5);
+      font-size: 0.78rem;
+      color: var(--ink);
       white-space: nowrap;
     }
 
@@ -129,8 +141,8 @@
       width: 8px;
       height: 8px;
       border-radius: 999px;
-      background: #27ae60;
-      box-shadow: 0 0 0 5px rgba(39, 174, 96, 0.22);
+      background: var(--green);
+      box-shadow: 0 0 0 5px rgba(56, 194, 139, 0.25);
     }
 
     .status-text {
@@ -141,7 +153,7 @@
       display: grid;
       grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
       gap: 1.8rem;
-      align-items: flex-start;
+      align-items: stretch;
     }
 
     .panel {
@@ -158,6 +170,7 @@
       letter-spacing: 0.12em;
       color: var(--text-muted);
       margin-bottom: 0.35rem;
+      font-family: var(--font-display);
     }
 
     .field-group {
@@ -178,6 +191,7 @@
       font-size: 0.88rem;
       font-weight: 550;
       color: var(--text-main);
+      font-family: var(--font-sans);
     }
 
     .field-hint {
@@ -185,11 +199,28 @@
       color: var(--text-muted);
     }
 
+    .pantry-bubbles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.3rem;
+    }
+
+    .pantry-bubble {
+      padding: 0.18rem 0.55rem;
+      border-radius: var(--radius-pill);
+      background: rgba(230, 244, 236, 0.9);
+      border: 1px solid rgba(171, 196, 182, 0.8);
+      font-size: 0.76rem;
+      color: var(--green-dark);
+    }
+
     textarea,
     input[type="text"],
     input[type="number"] {
       width: 100%;
-      font: inherit;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
       padding: 0.6rem 0.75rem;
       border-radius: var(--radius-md);
       border: 1px solid var(--border-subtle);
@@ -225,18 +256,17 @@
 
     .inline-fields {
       display: flex;
-      gap: 0.9rem;
-      align-items: flex-end;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 0.7rem;
+      align-items: stretch;
     }
 
     .inline-fields .field-group {
-      flex: 1 1 0;
       margin-bottom: 0;
     }
 
     .servings-input {
-      max-width: 140px;
+      max-width: none;
     }
 
     #generateBtn {
@@ -244,45 +274,54 @@
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      padding: 0.68rem 1.4rem;
+      padding: 0.72rem 1.55rem;
       border-radius: 999px;
-      background: linear-gradient(135deg, #2f9b6a, #3fbf7b);
-      color: white;
+      background:
+        radial-gradient(circle at 0% 0%, #fffbeb 0, transparent 55%),
+        linear-gradient(135deg, #f97316, #ec4899);
+      color: #111827;
       border: none;
       font-weight: 600;
       font-size: 0.9rem;
+      font-family: var(--font-display);
       cursor: pointer;
-      box-shadow: 0 12px 26px rgba(11, 69, 47, 0.4);
+      box-shadow:
+        0 0 0 1px rgba(248, 250, 252, 0.85),
+        0 16px 32px rgba(236, 72, 153, 0.45);
       transform: translateY(0);
       transition:
         transform 120ms ease,
-        box-shadow 140ms ease,
+        box-shadow 160ms ease,
         filter 150ms ease,
         opacity 140ms ease,
-        background-position 160ms ease;
-      background-size: 140% 140%;
+        background-position 180ms ease;
+      background-size: 160% 160%;
       background-position: 0% 0%;
       white-space: nowrap;
     }
 
     #generateBtn:hover:not(:disabled) {
-      transform: translateY(-1px);
-      box-shadow: 0 16px 32px rgba(12, 77, 52, 0.5);
-      filter: brightness(1.03);
+      transform: translateY(-2px);
+      box-shadow:
+        0 0 0 1px rgba(248, 250, 252, 0.95),
+        0 20px 40px rgba(236, 72, 153, 0.6);
+      filter: brightness(1.04);
       background-position: 100% 0%;
     }
 
     #generateBtn:active:not(:disabled) {
       transform: translateY(0);
-      box-shadow: 0 10px 24px rgba(11, 69, 47, 0.4);
-      filter: brightness(0.98);
+      box-shadow:
+        0 0 0 1px rgba(248, 250, 252, 0.9),
+        0 12px 26px rgba(236, 72, 153, 0.5);
+      filter: brightness(0.99);
     }
 
     #generateBtn:disabled {
       cursor: default;
-      background: #b0c8b7;
+      background: linear-gradient(135deg, #e5e7eb, #d1d5db);
       box-shadow: none;
-      opacity: 0.7;
+      opacity: 0.85;
     }
 
     #generateBtn::after {
@@ -297,8 +336,9 @@
     }
 
     .recipes-title {
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 600;
+      font-family: var(--font-display);
     }
 
     .recipes-hint {
@@ -307,38 +347,47 @@
     }
 
     #recipes {
-      min-height: 120px;
+      min-height: 140px;
       border-radius: var(--radius-md);
       border: 1px dashed rgba(171, 196, 182, 0.9);
       padding: 0.85rem 0.95rem;
-      background: linear-gradient(135deg, #f7fcf9 0, #f0f7f2 100%);
+      background: linear-gradient(135deg, #f9fbff 0, #f3f7ff 30%, #f0fbf7 100%);
       color: var(--text-muted);
       font-size: 0.87rem;
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
       align-items: stretch;
-      justify-content: flex-start;
-      gap: 0.7rem;
+      justify-content: space-between;
+      gap: 0.8rem;
+    }
+
+    #recipes.empty {
+      justify-content: center;
+      align-items: center;
     }
 
     #recipes.empty::before {
       content: "Your recipe ideas will bloom here.";
       text-align: center;
       margin: 0.25rem 0;
+      width: 100%;
     }
 
     .recipe-card {
       background: #ffffff;
-      border-radius: 16px;
-      padding: 0.8rem 0.85rem 0.9rem;
+      border-radius: 18px;
+      padding: 0.9rem 0.95rem 0.95rem;
       border: 1px solid rgba(205, 224, 214, 0.94);
-      box-shadow: 0 10px 24px rgba(11, 69, 47, 0.08);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+      flex: 1 1 calc(33.333% - 0.8rem);
+      min-width: 0;
     }
 
     .recipe-card-title {
       font-weight: 600;
-      color: var(--green-dark);
+      color: var(--ink);
       margin-bottom: 0.2rem;
+      font-family: var(--font-display);
     }
 
     .recipe-card-meta {
@@ -351,6 +400,41 @@
       font-size: 0.84rem;
       color: var(--text-main);
       line-height: 1.4;
+    }
+
+    .recipe-card-footer {
+      margin-top: 0.55rem;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .recipe-save-btn {
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(59, 175, 122, 0.35);
+      background: rgba(230, 244, 236, 0.9);
+      color: var(--green-dark);
+      font-size: 0.76rem;
+      padding: 0.2rem 0.7rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition:
+        background-color 140ms ease,
+        border-color 140ms ease,
+        color 140ms ease,
+        transform 120ms ease;
+    }
+
+    .recipe-save-btn:hover {
+      transform: translateY(-1px);
+      background: rgba(211, 237, 222, 0.95);
+    }
+
+    .recipe-save-btn.is-saved {
+      background: var(--green);
+      border-color: var(--green);
+      color: #ffffff;
     }
 
     .recipes-loading {
@@ -421,6 +505,24 @@
       color: var(--text-muted);
     }
 
+    .history-item-remove {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      cursor: pointer;
+      padding: 0.1rem 0.25rem;
+      border-radius: 999px;
+      transition:
+        background-color 120ms ease,
+        color 120ms ease;
+    }
+
+    .history-item-remove:hover {
+      background: rgba(148, 163, 184, 0.16);
+      color: var(--ink);
+    }
+
     @keyframes pulse {
       0% { transform: scale(0.9); opacity: 0.7; }
       50% { transform: scale(1.1); opacity: 1; }
@@ -459,6 +561,15 @@
 
       .status-pill {
         align-self: flex-start;
+      }
+
+      #recipes {
+        flex-direction: column;
+        flex-wrap: nowrap;
+      }
+
+      .recipe-card {
+        flex: 1 1 auto;
       }
     }
   </style>
@@ -511,6 +622,7 @@
             <div id="pantrySavedNote" class="field-hint" style="display:none; margin-top:0.1rem;">
               Pantry saved locally
             </div>
+            <div id="pantryBubbles" class="pantry-bubbles"></div>
           </div>
 
           <div class="inline-fields">
@@ -544,20 +656,20 @@
           <div id="errorMessage" class="hidden" role="alert"></div>
         </section>
 
-        <section class="panel" aria-label="Recipe suggestions">
+        <section class="panel" aria-label="Saved inspirations">
           <div class="recipes-header">
-            <div class="recipes-title">Recipe suggestions</div>
-            <div class="recipes-hint">Powered by your produce + pantry.</div>
-          </div>
-          <div id="recipes" class="empty"></div>
-        </section>
-
-        <section class="panel" aria-label="Past inspirations">
-          <div class="recipes-header">
-            <div class="recipes-title">Past inspirations</div>
-            <div class="recipes-hint">Tap to revisit a previous set of ideas.</div>
+            <div class="recipes-title">Saved inspirations</div>
+            <div class="recipes-hint">Click a tile to load it back into recipes.</div>
           </div>
           <div id="historyList"></div>
+        </section>
+
+        <section class="panel" aria-label="Recipe suggestions" style="grid-column: 1 / -1;">
+          <div class="recipes-header">
+            <div class="recipes-title">Recipe suggestions</div>
+            <div class="recipes-hint">Tap the star on recipes you want to keep.</div>
+          </div>
+          <div id="recipes" class="empty"></div>
         </section>
       </main>
     </div>
@@ -576,11 +688,14 @@
     const servingsInput = document.getElementById('servingsInput');
     const historyListEl = document.getElementById('historyList');
     const pantrySavedNote = document.getElementById('pantrySavedNote');
+    const pantryBubbles = document.getElementById('pantryBubbles');
 
     const STORAGE_KEYS = {
       pantry: 'plantify_pantry',
       history: 'plantify_history',
     };
+
+    let lastGeneratedRecipes = [];
 
     function getMaxSavedRuns() {
       const fallback = 20;
@@ -645,6 +760,7 @@
         if (pantrySavedNote) {
           pantrySavedNote.style.display = 'inline';
         }
+        renderPantryBubbles(stored.value);
       }
     }
 
@@ -659,6 +775,22 @@
       }
     }
 
+    function renderPantryBubbles(value) {
+      if (!pantryBubbles) return;
+      const text = (value || '').trim();
+      if (!text) {
+        pantryBubbles.innerHTML = '';
+        return;
+      }
+      const tokens = text
+        .split(/[,;\n]/)
+        .map(t => t.trim())
+        .filter(Boolean);
+      pantryBubbles.innerHTML = tokens
+        .map(token => `<span class="pantry-bubble">${token}</span>`)
+        .join('');
+    }
+
     function appendToHistory(entry) {
       if (!entry) return;
       const existing = safeGetStoredJson(STORAGE_KEYS.history);
@@ -667,6 +799,53 @@
       const max = getMaxSavedRuns();
       const trimmed = arr.slice(0, max);
       safeSetItem(STORAGE_KEYS.history, JSON.stringify(trimmed));
+    }
+
+    function getHistoryArray() {
+      const history = safeGetStoredJson(STORAGE_KEYS.history);
+      return Array.isArray(history) ? history : [];
+    }
+
+    function removeHistoryEntry(index) {
+      const history = getHistoryArray();
+      if (!history.length || index < 0 || index >= history.length) return;
+      history.splice(index, 1);
+      safeSetItem(STORAGE_KEYS.history, JSON.stringify(history));
+      renderHistoryList();
+    }
+
+    function isRecipeSavedByKey(key) {
+      if (!key) return false;
+      const history = getHistoryArray();
+      return history.some(entry => entry && entry.key === key);
+    }
+
+    function toggleSaveRecipeByKey(key) {
+      if (!key) return;
+      const history = getHistoryArray();
+      const existingIndex = history.findIndex(entry => entry && entry.key === key);
+
+      if (existingIndex >= 0) {
+        history.splice(existingIndex, 1);
+        safeSetItem(STORAGE_KEYS.history, JSON.stringify(history));
+        renderHistoryList();
+        return;
+      }
+
+      const recipe = lastGeneratedRecipes.find(r => r.key === key);
+      if (!recipe) return;
+
+      const entry = {
+        id: recipe.key,
+        key: recipe.key,
+        title: recipe.title,
+        body: recipe.body,
+        servings: recipe.servings,
+        at: new Date().toISOString(),
+      };
+
+      appendToHistory(entry);
+      renderHistoryList();
     }
 
     function extractFirstTitleFromHistoryText(text) {
@@ -693,7 +872,7 @@
           const niceDate = at && !isNaN(at.getTime())
             ? at.toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })
             : 'Unknown time';
-          const title = extractFirstTitleFromHistoryText(entry.text || '');
+          const title = entry.title || extractFirstTitleFromHistoryText(entry.text || '');
 
           return `
             <button
@@ -705,7 +884,17 @@
                 <span class="history-item-title">${title}</span>
                 <span class="history-item-meta">${niceDate}</span>
               </span>
-              <span class="history-item-chevron" aria-hidden="true">↻</span>
+              <span style="display:flex;align-items:center;gap:0.15rem;">
+                <span class="history-item-chevron" aria-hidden="true">↻</span>
+                <button
+                  type="button"
+                  class="history-item-remove"
+                  data-history-remove="${index}"
+                  aria-label="Remove saved inspiration"
+                >
+                  ×
+                </button>
+              </span>
             </button>
           `;
         }).join('');
@@ -719,6 +908,26 @@
 
     function renderRecipesFromHistoryEntry(entry) {
       if (!entry || !recipesEl) return;
+      recipesEl.classList.remove('empty', 'recipes-error');
+      const servings = typeof entry.servings === 'number' && entry.servings > 0
+        ? entry.servings
+        : (Number(servingsInput?.value || 0) || 2);
+
+      // New-style entries with structured title/body
+      if (entry.title || entry.body) {
+        const title = entry.title || 'Saved inspiration';
+        const body = (entry.body || '').trim();
+        recipesEl.innerHTML = `
+          <article class="recipe-card">
+            <div class="recipe-card-title">${title}</div>
+            <div class="recipe-card-meta">Vegetarian · Serves ~${servings}</div>
+            <div class="recipe-card-body">${body.replace(/\n/g, '<br>')}</div>
+          </article>
+        `;
+        return;
+      }
+
+      // Backwards-compatible rendering for older saved entries that only have text
       const text = entry.text || '';
       const sections = text
         .split(/(?:^|\n)(?=Recipe\s+\d+:)/i)
@@ -726,16 +935,10 @@
         .filter(Boolean)
         .slice(0, 3);
 
-      recipesEl.classList.remove('empty', 'recipes-error');
-
       if (!sections.length) {
         recipesEl.innerHTML = '<div class="recipe-card-body">We could not parse separate recipes from this inspiration.</div>';
         return;
       }
-
-      const servings = typeof entry.servings === 'number' && entry.servings > 0
-        ? entry.servings
-        : (Number(servingsInput?.value || 0) || 2);
 
       recipesEl.innerHTML = sections
         .map((section, index) => {
@@ -844,19 +1047,10 @@
           return;
         }
 
-        // Persist pantry + history only on successful, non-empty runs
+        // Persist pantry only on successful, non-empty runs
         if (pantryInput && typeof pantryInput.value === 'string') {
           persistPantry(pantryInput.value);
         }
-        appendToHistory({
-          at: new Date().toISOString(),
-          produce: payload.produce,
-          pantry: payload.pantry,
-          preferences: payload.preferences,
-          servings: payload.servings,
-          text: textContent,
-        });
-        renderHistoryList();
 
         const sections = textContent
           .split(/(?:^|\n)(?=Recipe\s+\d+:)/i)
@@ -873,21 +1067,47 @@
             '<div class="recipe-card-body">We could not parse separate recipes, but here is the raw response:</div><pre class="recipe-card-body" style="margin-top:0.4rem; white-space:pre-wrap;">' +
             textContent +
             '</pre>';
+          lastGeneratedRecipes = [];
           return;
         }
 
-        recipesEl.innerHTML = sections
-          .map((section, index) => {
-            const lines = section.split('\n').filter(Boolean);
-            const titleLine = lines[0] || `Recipe ${index + 1}`;
-            const title = titleLine.replace(/^Recipe\s+\d+:\s*/i, '').trim() || titleLine;
-            const body = lines.slice(1).join('\n').trim();
+        lastGeneratedRecipes = sections.map((section, index) => {
+          const lines = section.split('\n').filter(Boolean);
+          const titleLine = lines[0] || `Recipe ${index + 1}`;
+          const title = titleLine.replace(/^Recipe\s+\d+:\s*/i, '').trim() || titleLine;
+          const body = lines.slice(1).join('\n').trim();
+          const key = `${title}::${body}`.slice(0, 400);
+          return {
+            key,
+            title,
+            body,
+            servings: payload.servings,
+          };
+        });
+
+        recipesEl.innerHTML = lastGeneratedRecipes
+          .map(recipe => {
+            const isSaved = isRecipeSavedByKey(recipe.key);
+            const safeBody = recipe.body.replace(/\n/g, '<br>');
+            const btnClass = `recipe-save-btn${isSaved ? ' is-saved' : ''}`;
+            const btnLabel = isSaved ? 'Saved' : 'Save';
 
             return `
               <article class="recipe-card">
-                <div class="recipe-card-title">${title}</div>
-                <div class="recipe-card-meta">Vegetarian · Serves ~${payload.servings}</div>
-                <div class="recipe-card-body">${body.replace(/\n/g, '<br>')}</div>
+                <div class="recipe-card-title">${recipe.title}</div>
+                <div class="recipe-card-meta">Vegetarian · Serves ~${recipe.servings}</div>
+                <div class="recipe-card-body">${safeBody}</div>
+                <div class="recipe-card-footer">
+                  <button
+                    type="button"
+                    class="${btnClass}"
+                    data-save-recipe="true"
+                    data-recipe-key="${recipe.key.replace(/"/g, '&quot;')}"
+                  >
+                    <span aria-hidden="true">★</span>
+                    <span>${btnLabel}</span>
+                  </button>
+                </div>
               </article>
             `;
           })
@@ -919,6 +1139,18 @@
         const target = event.target;
         if (!target) return;
 
+        const removeBtn = target.closest
+          ? target.closest('.history-item-remove')
+          : null;
+        if (removeBtn) {
+          const indexAttr = removeBtn.getAttribute('data-history-remove');
+          const removeIndex = typeof indexAttr === 'string' ? Number(indexAttr) : NaN;
+          if (!Number.isNaN(removeIndex)) {
+            removeHistoryEntry(removeIndex);
+          }
+          return;
+        }
+
         const button = target.closest
           ? target.closest('.history-item')
           : null;
@@ -935,6 +1167,53 @@
 
         const entry = history[index];
         renderRecipesFromHistoryEntry(entry);
+      });
+    }
+
+    if (pantryInput) {
+      pantryInput.addEventListener('input', () => {
+        renderPantryBubbles(pantryInput.value);
+      });
+    }
+
+    if (recipesEl) {
+      recipesEl.addEventListener('click', (event) => {
+        const target = event.target;
+        if (!target || !target.closest) return;
+        const button = target.closest('.recipe-save-btn');
+        if (!button) return;
+        const key = button.getAttribute('data-recipe-key');
+        toggleSaveRecipeByKey(key);
+
+        // Re-render current recipes to reflect updated save state
+        if (!lastGeneratedRecipes.length) return;
+        recipesEl.innerHTML = lastGeneratedRecipes
+          .map(recipe => {
+            const isSaved = isRecipeSavedByKey(recipe.key);
+            const safeBody = recipe.body.replace(/\n/g, '<br>');
+            const btnClass = `recipe-save-btn${isSaved ? ' is-saved' : ''}`;
+            const btnLabel = isSaved ? 'Saved' : 'Save';
+
+            return `
+              <article class="recipe-card">
+                <div class="recipe-card-title">${recipe.title}</div>
+                <div class="recipe-card-meta">Vegetarian · Serves ~${recipe.servings}</div>
+                <div class="recipe-card-body">${safeBody}</div>
+                <div class="recipe-card-footer">
+                  <button
+                    type="button"
+                    class="${btnClass}"
+                    data-save-recipe="true"
+                    data-recipe-key="${recipe.key.replace(/"/g, '&quot;')}"
+                  >
+                    <span aria-hidden="true">★</span>
+                    <span>${btnLabel}</span>
+                  </button>
+                </div>
+              </article>
+            `;
+          })
+          .join('');
       });
     }
   </script>
