@@ -125,8 +125,6 @@ app.post('/api/recipes', async (req, res) => {
 });
 
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`[v0] Plantify server listening on http://0.0.0.0:${PORT}`);
-  console.log(`[v0] Serving static files from: ${path.join(__dirname)}`);
-  console.log(`[v0] index.html exists:`, require('fs').existsSync(path.join(__dirname, 'index.html')));
+  console.log(`Plantify server listening on http://0.0.0.0:${PORT}`);
 });
 
