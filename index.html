@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Plantify</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: #f4f9f4;
+        --card-bg: #ffffff;
+        --primary: #5c9b71;
+        --primary-dark: #417656;
+        --accent: #a8d5ba;
+        --text-main: #1f2a33;
+        --text-muted: #6b7b82;
+        --border-subtle: #d7e4d9;
+        --danger: #c05959;
+        --shadow-soft: 0 10px 25px rgba(0, 0, 0, 0.06);
+        --radius-lg: 16px;
+        --radius-md: 10px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+          "Segoe UI", sans-serif;
+        background: radial-gradient(circle at top left, #e2f3e4, var(--bg));
+        color: var(--text-main);
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+      }
+
+      .app-shell {
+        max-width: 1100px;
+        width: 100%;
+        margin: 32px 16px;
+        background: linear-gradient(
+              145deg,
+              rgba(168, 213, 186, 0.18),
+              transparent 45%
+            ),
+          var(--card-bg);
+        border-radius: 28px;
+        box-shadow: var(--shadow-soft);
+        padding: 28px 26px 26px;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(10px);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .brand-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        background: radial-gradient(circle at 30% 20%, #f7fff9, #5c9b71);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #f7fff9;
+        font-size: 22px;
+        box-shadow: 0 10px 20px rgba(92, 155, 113, 0.4);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 1.8rem;
+        letter-spacing: 0.03em;
+      }
+
+      .tagline {
+        margin: 4px 0 0;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+      }
+
+      .pill {
+        padding: 5px 11px;
+        border-radius: 999px;
+        border: 1px solid rgba(92, 155, 113, 0.2);
+        background: rgba(244, 249, 244, 0.9);
+        color: var(--primary-dark);
+        font-size: 0.75rem;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .pill-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: #5c9b71;
+        box-shadow: 0 0 0 4px rgba(92, 155, 113, 0.18);
+      }
+
+      main {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+        gap: 22px;
+      }
+
+      @media (max-width: 840px) {
+        main {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      .card {
+        border-radius: var(--radius-lg);
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(215, 228, 217, 0.9);
+        padding: 18px 18px 16px;
+        box-shadow: 0 12px 25px rgba(15, 35, 26, 0.06);
+      }
+
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 10px;
+      }
+
+      .card-title {
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-muted);
+      }
+
+      label {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--text-main);
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      textarea,
+      input[type="text"],
+      input[type="number"] {
+        width: 100%;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-subtle);
+        padding: 9px 10px;
+        font: inherit;
+        resize: vertical;
+        min-height: 72px;
+        background: #f9fcf9;
+        transition: border-color 0.16s ease, box-shadow 0.16s ease,
+          background-color 0.16s ease, transform 0.08s ease;
+      }
+
+      textarea:focus,
+      input[type="text"]:focus,
+      input[type="number"]:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 1px rgba(92, 155, 113, 0.45),
+          0 16px 32px rgba(92, 155, 113, 0.18);
+        background: #ffffff;
+        transform: translateY(-1px);
+      }
+
+      textarea::placeholder,
+      input::placeholder {
+        color: #a2b3a6;
+      }
+
+      .field-group {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+
+      .field-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1.8fr) auto;
+        gap: 12px;
+        align-items: end;
+      }
+
+      @media (max-width: 600px) {
+        .field-row {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      .hint {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+      }
+
+      button {
+        border-radius: 999px;
+        border: none;
+        padding: 10px 20px;
+        font: inherit;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: #f7fff9;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        box-shadow: 0 14px 25px rgba(65, 118, 86, 0.35);
+        transition: transform 0.1s ease, box-shadow 0.12s ease,
+          filter 0.1s ease, background 0.18s ease;
+      }
+
+      button:hover:not(:disabled) {
+        transform: translateY(-1px);
+        box-shadow: 0 18px 35px rgba(65, 118, 86, 0.4);
+        filter: brightness(1.03);
+      }
+
+      button:active:not(:disabled) {
+        transform: translateY(0);
+        box-shadow: 0 10px 20px rgba(65, 118, 86, 0.32);
+        filter: brightness(0.98);
+      }
+
+      button:disabled {
+        cursor: not-allowed;
+        background: linear-gradient(135deg, #b7c9bd, #93a69a);
+        box-shadow: none;
+        opacity: 0.8;
+      }
+
+      button .status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: rgba(244, 249, 244, 0.95);
+      }
+
+      button[data-status="generating"] .status-dot {
+        animation: pulse 1s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          opacity: 0.6;
+        }
+        50% {
+          transform: scale(1.45);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 0.6;
+        }
+      }
+
+      #recipes {
+        min-height: 120px;
+        border-radius: var(--radius-lg);
+        border: 1px dashed rgba(92, 155, 113, 0.4);
+        padding: 14px 14px 16px;
+        background: linear-gradient(
+          145deg,
+          rgba(232, 244, 235, 0.7),
+          rgba(249, 252, 249, 0.95)
+        );
+        font-size: 0.93rem;
+        color: var(--text-main);
+        position: relative;
+      }
+
+      #recipes.empty::before {
+        content: "Your seasonal recipes will bloom here.";
+        color: var(--text-muted);
+        font-size: 0.85rem;
+      }
+
+      #errorMessage {
+        margin-top: 8px;
+        font-size: 0.85rem;
+        color: var(--danger);
+        min-height: 1.2em;
+      }
+
+      #status {
+        margin-left: 10px;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header>
+        <div class="brand">
+          <div class="brand-icon" aria-hidden="true">🌱</div>
+          <div>
+            <h1>Plantify</h1>
+            <p class="tagline">Turn fresh produce into effortless plant-based meals.</p>
+          </div>
+        </div>
+        <div class="pill">
+          <span class="pill-dot" aria-hidden="true"></span>
+          Seasonal, vibrant & veggie-forward
+        </div>
+      </header>
+
+      <main>
+        <section class="card" aria-label="Inputs">
+          <div class="card-header">
+            <div class="card-title">What do you have?</div>
+          </div>
+
+          <div class="field-group">
+            <div>
+              <label for="produceInput">Current produce</label>
+              <textarea
+                id="produceInput"
+                placeholder="e.g. 2 zucchinis, cherry tomatoes, basil, half a lemon"
+              ></textarea>
+              <div class="hint">
+                List the fresh fruits and vegetables you want to use first.
+              </div>
+            </div>
+
+            <div>
+              <label for="pantryInput">Pantry staples</label>
+              <textarea
+                id="pantryInput"
+                placeholder="e.g. olive oil, quinoa, chickpeas, garlic, oats, spices"
+              ></textarea>
+              <div class="hint">
+                Include grains, beans, sauces, and anything shelf-stable you’d like to use.
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div>
+                <label for="preferencesInput">Taste preferences</label>
+                <input
+                  id="preferencesInput"
+                  type="text"
+                  placeholder="e.g. bright & lemony, high-protein, minimal dishes"
+                />
+              </div>
+
+              <div>
+                <label for="servingsInput">Servings</label>
+                <input
+                  id="servingsInput"
+                  type="number"
+                  min="1"
+                  value="2"
+                  inputmode="numeric"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <button id="generateBtn" type="button" data-status="idle">
+              <span class="status-dot" aria-hidden="true"></span>
+              <span class="label">Generate recipes</span>
+              <span id="status" aria-live="polite"></span>
+            </button>
+          </div>
+
+          <div id="errorMessage" role="alert" aria-live="polite"></div>
+        </section>
+
+        <section class="card" aria-label="Suggested recipes">
+          <div class="card-header">
+            <div class="card-title">Recipes</div>
+          </div>
+          <div id="recipes" class="empty"></div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      (function () {
+        const generateBtn = document.getElementById("generateBtn");
+        const errorEl = document.getElementById("errorMessage");
+        const recipesEl = document.getElementById("recipes");
+        const statusEl = document.getElementById("status");
+        const produceInput = document.getElementById("produceInput");
+        const pantryInput = document.getElementById("pantryInput");
+        const preferencesInput = document.getElementById("preferencesInput");
+        const servingsInput = document.getElementById("servingsInput");
+
+        if (
+          !generateBtn ||
+          !errorEl ||
+          !recipesEl ||
+          !statusEl ||
+          !produceInput ||
+          !pantryInput ||
+          !preferencesInput ||
+          !servingsInput
+        ) {
+          console.error("[Plantify] UI elements missing on page load.");
+          return;
+        }
+
+        function setGeneratingState(isGenerating) {
+          if (isGenerating) {
+            generateBtn.disabled = true;
+            generateBtn.dataset.status = "generating";
+            statusEl.textContent = "Generating...";
+          } else {
+            generateBtn.disabled = false;
+            generateBtn.dataset.status = "idle";
+            // Keep last status text (e.g. Ready/Error) managed by generateRecipes
+          }
+        }
+
+        function renderRecipes(recipes) {
+          recipesEl.classList.remove("empty");
+          recipesEl.innerHTML = "";
+
+          if (!recipes || recipes.length === 0) {
+            const empty = document.createElement("div");
+            empty.textContent =
+              "No recipe ideas came back. Try adjusting your ingredients or preferences.";
+            recipesEl.appendChild(empty);
+            return;
+          }
+
+          recipes.forEach((recipe) => {
+            const card = document.createElement("article");
+            card.className = "recipe-card";
+            const title = document.createElement("h3");
+            const body = document.createElement("p");
+
+            title.textContent = recipe.title || "Recipe";
+            body.textContent = recipe.description || recipe.body || "";
+
+            card.appendChild(title);
+            card.appendChild(body);
+            recipesEl.appendChild(card);
+          });
+        }
+
+        async function generateRecipes() {
+          errorEl.textContent = "";
+          statusEl.textContent = "Generating...";
+
+          setGeneratingState(true);
+
+          const produce = produceInput.value.trim();
+          const pantry = pantryInput.value.trim();
+          const preferences = preferencesInput.value.trim();
+          const servings = servingsInput.value || "2";
+
+          const prompt = [
+            "You are Plantify, a vegetarian recipe assistant.",
+            "Using ONLY the listed fresh produce and pantry staples (plus basic pantry items like salt, pepper, and water),",
+            "create EXACTLY 3 distinct vegetarian recipes.",
+            "",
+            "Requirements:",
+            `- Number of servings for each recipe: ${servings}.`,
+            "- Only use ingredients from the lists plus standard pantry basics.",
+            "- Make the recipes clear and concise for home cooks.",
+            "",
+            "Fresh produce:",
+            produce || "(none provided)",
+            "",
+            "Pantry staples:",
+            pantry || "(none provided)",
+            "",
+            "Taste preferences:",
+            preferences || "(none provided)",
+            "",
+            "Return JSON with this shape:",
+            `{"recipes":[{"title":"string","description":"short overview","steps":["step 1","step 2"],"ingredients":["item"]}]}`,
+          ].join("\n");
+
+          try {
+            if (
+              typeof CONFIG === "undefined" ||
+              typeof CONFIG_KEYS === "undefined" ||
+              !CONFIG.OPENAI_ENDPOINT ||
+              !CONFIG.OPENAI_MODEL ||
+              !CONFIG_KEYS.OPENAI_API_KEY
+            ) {
+              throw new Error(
+                "Missing CONFIG or CONFIG_KEYS. Please configure API endpoint, model, and key."
+              );
+            }
+
+            const response = await fetch(CONFIG.OPENAI_ENDPOINT, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${CONFIG_KEYS.OPENAI_API_KEY}`,
+              },
+              body: JSON.stringify({
+                model: CONFIG.OPENAI_MODEL,
+                input: prompt,
+              }),
+            });
+
+            if (!response.ok) {
+              throw new Error(
+                `Request failed with status ${response.status} ${response.statusText}`
+              );
+            }
+
+            let data;
+            try {
+              data = await response.json();
+            } catch (parseError) {
+              throw new Error("Unable to parse API response as JSON.");
+            }
+
+            const recipes =
+              data?.recipes ||
+              data?.result?.recipes ||
+              data?.choices?.[0]?.message?.recipes ||
+              [];
+
+            renderRecipes(recipes);
+            statusEl.textContent = "Ready";
+          } catch (error) {
+            console.error("Plantify API error:", error);
+            statusEl.textContent = "Error";
+            errorEl.textContent =
+              "We couldn’t generate recipes right now. Please check your connection and try again.";
+          } finally {
+            setGeneratingState(false);
+          }
+        }
+
+        generateBtn.addEventListener("click", () => {
+          if (generateBtn.disabled) return;
+          generateRecipes();
+        });
+      })();
+    </script>
+  </body>
+</html>
+
