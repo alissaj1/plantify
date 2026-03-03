@@ -1120,7 +1120,7 @@
         if (recipesEl) {
           recipesEl.classList.add('recipes-error');
           recipesEl.innerHTML =
-            '<div class="recipe-card-body">We hit a snag talking to the recipe service. Your ingredients are safe—try generating again.</div>';
+            '<div class="recipe-card-body">DEBUG: ' + error.message + '</div>';
         }
       } finally {
         setGeneratingState(false);
